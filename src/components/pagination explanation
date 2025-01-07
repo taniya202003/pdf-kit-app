@@ -1,0 +1,40 @@
+// Let's break down the logic behind these lines step by step:
+
+// ### 1. `const pageIndex = currentPage * userPerPage;`
+
+// - **Purpose**: This calculates the index of the last item on the current page.
+// - **How it works**: 
+//   - `currentPage` represents the current page number (starts from 1).
+//   - `userPerPage` is the number of users (or rows) displayed on each page (in this case, 8).
+//   - Multiplying `currentPage * userPerPage` gives the total number of users that have been displayed up to the last item on the current page.
+//   - For example, if you’re on page 2 and displaying 8 users per page, this will give `2 * 8 = 16`, meaning that the 16th user is the last one on the second page.
+
+// ### 2. `const newPageIndex = pageIndex - userPerPage;`
+
+// - **Purpose**: This calculates the index of the first item on the current page.
+// - **How it works**:
+//   - `pageIndex` gives the index of the last item on the current page (as calculated in the previous step).
+//   - Subtracting `userPerPage` (8) from `pageIndex` gives the index of the first item on the current page.
+//   - For example, if `pageIndex` is 16 (end of page 2), `newPageIndex` will be `16 - 8 = 8`, which means the first item on page 2 is at index 8 (since JavaScript arrays are 0-based).
+
+// ### 3. `const currentIndex = data.slice(newPageIndex, pageIndex);`
+
+// - **Purpose**: This extracts the data (user rows) to be displayed on the current page.
+// - **How it works**:
+//   - `data.slice(newPageIndex, pageIndex)` takes a slice of the data array between the indices `newPageIndex` and `pageIndex`.
+//   - The `slice` method in JavaScript extracts a portion of an array from the start index (`newPageIndex`) up to, but not including, the end index (`pageIndex`).
+//   - So, if `newPageIndex` is 8 and `pageIndex` is 16, `data.slice(8, 16)` will return the 8th through 15th items from the `data` array, which will be displayed on the second page.
+
+// ### 4. `const userDataPerPage = Math.ceil(data.length / userPerPage);`
+
+// - **Purpose**: This calculates the total number of pages.
+// - **How it works**:
+//   - `data.length` is the total number of users or rows in the `data` array.
+//   - Dividing `data.length` by `userPerPage` gives the number of pages required to display all users.
+//   - The `Math.ceil` function rounds up to the nearest whole number, ensuring that any remainder users are displayed on an additional page.
+//   - For example, if there are 17 users in total and 8 users per page, `17 / 8 = 2.125`, and `Math.ceil(2.125)` gives 3 pages.
+
+// ### Summary of the Pagination Logic:
+// 1. Calculate the range of data to display based on the current page and the number of users per page.
+// 2. Extract a portion of the `data` array corresponding to the current page.
+// 3. Calculate the total number of pages based on the total number of users.

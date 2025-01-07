@@ -1,0 +1,442 @@
+* {
+  margin: 0;
+  padding: 0;
+  text-align: center;
+}
+
+/* form css ---------------------------------------------------------------------------------- */
+.form-container {
+  display: flex;
+  width: 100%;
+  justify-content: center;
+  align-items: center;
+  gap: 40px;
+}
+
+.form-div,
+.previewTable-data {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 20px;
+  margin-top: 3rem;
+  width: 100%;
+  max-width: 550px;
+}
+
+.table-form,
+.previewTable-container {
+  width: 100%;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+
+.table-form h2 {
+  padding: 8px;
+}
+
+.formData {
+  padding: 26px;
+}
+
+.form-inputDiv {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+}
+
+.table-form label {
+  display: flex;
+  width: 100%;
+  justify-content: center;
+  gap: 10px;
+  align-items: center;
+  font-weight: bold;
+}
+
+.input {
+  width: 100%;
+  max-width: 400px;
+  outline: none;
+  padding: 7px;
+  border: 2px solid #cfc9c9;
+  border-radius: 7px;
+}
+.input:focus {
+  border: 2px solid #1379dd;
+}
+
+.form-preview-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+}
+
+.form-div {
+  flex: 1;
+  padding-right: 20px;
+}
+
+.previewTable-data {
+  flex: 1;
+  padding-left: 20px;
+}
+
+.form-btns {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 2rem;
+  gap: 15px;
+}
+
+/* preview - table css -----------------------------------------------------------------------------*/
+.preview-data {
+  padding: 24.5px;
+  padding-top: 0;
+  width: 100%;
+  max-width: 500px;
+}
+
+.previewTable-container h2 {
+  padding: 8px;
+}
+
+.preview-table-div {
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.addRow-btnDiv-preview {
+  margin-top: 1.5rem;
+  display: flex;
+  justify-content: end;
+  align-items: center;
+  padding-right: 28px;
+  margin-bottom: 0.5rem;
+}
+
+.addRow-btn-preview {
+  font-weight: bold;
+  padding: 5px;
+}
+
+.preview-input {
+  width: 100%;
+  max-width: 158px;
+  outline: none;
+  padding: 7px;
+  border: 2px solid #cfc9c9;
+  border-radius: 7px;
+}
+
+/* table css -------------------------------------------------------------------------------------- */
+
+.main-table-div {
+  margin-top: 2rem;
+}
+
+.table-header-div {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+}
+
+.table-div,
+.preview-data {
+  border-collapse: collapse;
+  margin-bottom: 20px;
+  margin: auto;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.table {
+  width: 100%;
+  max-width: 1000px;
+}
+
+.table th,
+.table td {
+  padding: 10px;
+  border: 1px solid #ddd;
+  text-align: center;
+}
+
+.table th {
+  background-color: #f5f5f5;
+  font-weight: bold;
+  text-align: center;
+}
+
+.table tbody tr {
+  transition: all 0.2s ease;
+}
+
+.table tbody tr:hover {
+  background-color: #e49e9e;
+}
+.table tbody tr:hover .delete-btn {
+  color: white;
+}
+.table tbody tr:hover .edit-btn {
+  color: white;
+}
+.table tbody tr:hover .delete-btn:hover {
+  color: rgb(255, 0, 0);
+}
+.table tbody tr:hover .edit-btn:hover {
+  color: rgb(255, 0, 0);
+}
+
+.table-input {
+  width: 100%;
+  max-width: 180px;
+  outline: none;
+  padding: 7px;
+  border: 2px solid #cfc9c9;
+  border-radius: 7px;
+}
+
+.table-footer-btn {
+  width: 100%;
+  border: 1px solid #ddd;
+  max-width: 994px;
+  display: flex;
+  margin: auto;
+}
+
+.table-files-btns,
+.table-pagination-btn {
+  display: flex;
+  gap: 20px;
+}
+
+.pagination-btn {
+  padding: 2px 9px;
+  transition: all 0.2 ease;
+}
+
+.pagination-btn:hover {
+  border-color: #1379dd;
+  color: #1379dd;
+}
+
+.removeAll-btn-div {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 30px;
+  width: 100%;
+  max-width: 976px;
+  margin: auto;
+  padding: 9px;
+  border: 1px solid #ddd;
+}
+
+.table-selectAll,
+.userLength {
+  border: 1px solid;
+  padding: 3px 6px;
+  border-radius: 5px;
+  font-weight: bold;
+  font-size: 14px;
+}
+.table-selectAll:hover {
+  border-color: #1379dd;
+  color: #1379dd;
+}
+p.table-selectAll {
+  display: flex;
+  gap: 7px;
+  align-items: center;
+  justify-content: center;
+}
+
+.removeAll-btn {
+  display: flex;
+  gap: 5px;
+  align-items: center;
+  justify-content: center;
+  background-color: transparent;
+  border: 1px solid;
+  padding: 4.5px 6px;
+  font-weight: bold;
+  border-radius: 5px;
+}
+
+.removeAll-btn:hover {
+  border-color: #1379dd;
+  color: #1379dd;
+}
+
+.table-prev-next-btns {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+
+.prev-btn,
+.next-btn {
+  padding: 0px 9px;
+}
+.prev-btn:hover,
+.next-btn:hover {
+  border-color: #1379dd;
+  color: #1379dd;
+}
+
+/* btns css ----------------------------------------------------------------------------------------- */
+.btns {
+  margin-top: 0.6rem;
+  margin-bottom: 0.6rem;
+  display: flex;
+  justify-content: space-between;
+  gap: 20px;
+  align-items: center;
+  padding: 0px 17px;
+  width: 100%;
+}
+
+.add-btn,
+.excel-btn,
+.pdf-btn,
+.import-btn,
+.add-preview-btn,
+.goToUserBtn {
+  padding: 5px 10px;
+  border: none;
+  color: white;
+  border-radius: 5px;
+  font-weight: bold;
+  transition: 0.2s all ease;
+  cursor: pointer;
+}
+
+.add-btn {
+  background: darkgreen;
+  border: 2px solid #0e9349;
+}
+
+.add-btn:hover {
+  background: rgb(19, 139, 19);
+}
+
+.excel-btn {
+  background: dodgerblue;
+  border: 2px solid #1379dd;
+}
+
+.excel-btn:hover {
+  background: rgb(112, 176, 240);
+}
+
+.pdf-btn {
+  background: red;
+  border: 2px solid #dd1b3f;
+}
+.pdf-btn:hover {
+  background-color: #eb3737;
+}
+
+.import-btn {
+  background: orangered;
+  border: 2px solid coral;
+}
+.import-btn:hover {
+  background-color: #f5632e;
+}
+
+.delete-btn,
+.edit-btn {
+  border: none;
+  background: none;
+  transition: all 0.2s ease;
+  cursor: pointer;
+}
+.delete-btn:hover,
+.edit-btn:hover {
+  color: red;
+}
+
+.add-preview-btn {
+  margin-top: 1rem;
+  background: purple;
+  border: 2px solid plum;
+}
+
+.add-preview-btn:hover {
+  background: rgb(177, 18, 177);
+}
+
+.userData-navigation-btn {
+  margin-top: 1.5rem;
+}
+
+.goToUserBtn {
+  background: blue;
+  border: 2px solid lightskyblue;
+}
+
+.goToUserBtn:hover {
+  background: #0551df;
+}
+
+/* modle css --------------------------------------------------------------------------------------- */
+
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.modal {
+  background: white;
+  padding: 20px;
+  border-radius: 10px;
+  width: 100%;
+  max-width: 500px;
+  text-align: center;
+  height: 100%;
+  max-height: 200px;
+}
+
+.modal-detail {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+.modal-detail h3 {
+  margin-bottom: 2rem;
+}
+
+.modal-buttons {
+  display: flex;
+  justify-content: space-around;
+  margin-top: 20px;
+}
+
+.cancel-btn {
+  background-color: #ccc;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+}
+
+.modle-delete-btn {
+  background-color: red;
+  color: white;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+}

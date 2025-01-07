@@ -1,0 +1,427 @@
+// table file old code ---------
+// import React, { useState, useRef, useEffect } from "react";
+// import html2canvas from "html2canvas";
+// import jsPDF from "jspdf";
+// import * as XLSX from "xlsx";
+// import {OutTable, ExcelRenderer} from 'react-excel-renderer';
+
+// const inputs = {
+//   name: "",
+//   email: "",
+// };
+
+// export const Table = () => {
+//   const [data, setData] = useState([]);
+//   const [inputValues, setInputValues] = useState(inputs);
+
+//   const tableRef = useRef();
+//   const ref = tableRef;
+
+//   //useEffect is used so that data dont get hide on page refresh
+//   useEffect(() => {
+//     const getData = JSON.parse(localStorage.getItem("fileData")) || [];
+//     if (getData.length > 0) {
+//       setData(getData);
+//     }
+//   }, []);
+
+//   const handleOnChange = (e) => {
+//     const { name, value } = e.target;
+//     setInputValues((prev) => ({ ...prev, [name]: value }));
+//   };
+
+//   const OnChangeTable = (e, index) => {
+//     const { name, value } = e.target;
+//     const updatedData = [...data];
+//     updatedData[index][name] = value;
+//     setData(updatedData);
+//     localStorage.setItem("fileData", JSON.stringify(updatedData));
+//   };
+
+//   const handleSubmit = (e) => {
+//     e.preventDefault();
+//     let prevData = JSON.parse(localStorage.getItem("fileData"));
+//     if (!Array.isArray(prevData)) {
+//       prevData = [];
+//     }
+//     const updatedData = [...prevData, inputValues];
+//     setData(updatedData);
+//     localStorage.setItem("fileData", JSON.stringify(updatedData));
+//     setInputValues(inputs);
+//   };
+
+//   const handleImportFile = () => {};
+
+//   // this function is used to create or genrate PDF file
+//   const printPdfDocument = () => {
+//     const input = tableRef.current;
+//     if (!input) {
+//       console.error("Element with ref 'tableRef' not found.");
+//       return;
+//     }
+//     html2canvas(input).then((canvas) => {
+//       const imgData = canvas.toDataURL("image/png");
+//       const pdf = new jsPDF("p", "mm", "a4");
+//       const imgWidth = 210; // A4 width
+//       const pageHeight = 295; // A4 height
+//       const imgHeight = (canvas.height * imgWidth) / canvas.width;
+
+//       let heightLeft = imgHeight;
+//       let position = 0;
+
+//       pdf.addImage(imgData, "PNG", 0, position, imgWidth, imgHeight);
+//       heightLeft -= pageHeight;
+
+//       while (heightLeft > 0) {
+//         position = heightLeft - imgHeight;
+//         pdf.addPage();
+//         pdf.addImage(imgData, "PNG", 0, position, imgWidth, imgHeight);
+//         heightLeft -= pageHeight;
+//       }
+
+//       pdf.save("table.pdf");
+//     });
+//   };
+
+//   // this function is used to create or genrate Excel file
+//   const printToExcel = () => {
+//     const wb = XLSX.utils.book_new();
+//     const ws = XLSX.utils.json_to_sheet(data);
+//     XLSX.utils.book_append_sheet(wb, ws, "Users");
+//     XLSX.writeFile(wb, "useerData.xlsx");
+//   };
+
+//   const uploadFile = () => {
+
+//   }
+
+//   return (
+//     <div className="table-container">
+//       <div className="form-div">
+//         <form onSubmit={handleSubmit} className="table-form">
+//           <label>
+//             Name:
+//             <input
+//               className="input"
+//               type="text"
+//               placeholder="Enter your name"
+//               name="name"
+//               value={inputValues.name}
+//               onChange={handleOnChange}
+//               required
+//             />
+//           </label>
+//           <label>
+//             Email:
+//             <input
+//               className="input"
+//               type="email"
+//               placeholder="Enter your email"
+//               name="email"
+//               value={inputValues.email}
+//               onChange={handleOnChange}
+//               required
+//             />
+//           </label>
+//           <button className="add-btn" type="submit">
+//             Add
+//           </button>
+//         </form>
+// <div className="upload-div">
+//         <input className="uploadFile-input" type="file" onChange={uploadFile}   />
+//         <button className="import-btn" >
+//         Import File
+//         </button>
+//         </div>
+//       </div>
+
+//       <div className="table-div">
+//         <table className="table" ref={ref}>
+//           <thead>
+//             <tr>
+//               <th>Name</th>
+//               <th>Email</th>
+//             </tr>
+//           </thead>
+//           <tbody>
+//             {data.map((val, i) => (
+//               <tr key={i}>
+//                 <td>
+//                   <input
+//                     className="input"
+//                     type="text"
+//                     name="name"
+//                     value={val.name}
+//                     onChange={(e) => OnChangeTable(e, i)}
+//                   />
+//                 </td>
+//                 <td>
+//                   <input
+//                     className="input"
+//                     type="email"
+//                     name="email"
+//                     value={val.email}
+//                     onChange={(e) => OnChangeTable(e, i)}
+//                   />
+//                 </td>
+//               </tr>
+//             ))}
+//           </tbody>
+//         </table>
+//       </div>
+
+//       <div className="btns">
+//         <button className="excel-btn" onClick={printToExcel}>
+//           Create Excel
+//         </button>
+//         <button className="pdf-btn" onClick={printPdfDocument}>
+//           Create PDF
+//         </button>
+//       </div>
+//     </div>
+//   );
+// };
+
+// import React, { useState, useRef, useEffect } from "react";
+// import html2canvas from "html2canvas";
+// import jsPDF from "jspdf";
+// import * as XLSX from "xlsx";
+// import { ExcelRenderer } from 'react-excel-renderer';
+
+// const inputs = {
+//   name: "",
+//   email: "",
+// };
+
+// export const Table = () => {
+//   const [data, setData] = useState([]);
+//   const [inputValues, setInputValues] = useState(inputs);
+//   const [importedData, setImportedData] = useState([]);
+//   const tableRef = useRef();
+
+//   useEffect(() => {
+//     const getData = JSON.parse(localStorage.getItem("fileData")) || [];
+//     if (getData.length > 0) {
+//       setData(getData);
+//     }
+//   }, []);
+
+//   const handleOnChange = (e) => {
+//     const { name, value } = e.target;
+//     setInputValues((prev) => ({ ...prev, [name]: value }));
+//   };
+
+//   const OnChangeTable = (e, index) => {
+//     const { name, value } = e.target;
+//     const updatedData = [...data];
+//     updatedData[index][name] = value;
+//     setData(updatedData);
+//     localStorage.setItem("fileData", JSON.stringify(updatedData));
+//   };
+
+//   const handleSubmit = (e) => {
+//     e.preventDefault();
+//     let prevData = JSON.parse(localStorage.getItem("fileData"));
+//     if (!Array.isArray(prevData)) {
+//       prevData = [];
+//     }
+//     const updatedData = [...prevData, inputValues];
+//     setData(updatedData);
+//     localStorage.setItem("fileData", JSON.stringify(updatedData));
+//     setInputValues(inputs);
+//   };
+
+//   const handleImportFile = (event) => {
+//     let fileObj = event.target.files[0];
+
+//     ExcelRenderer(fileObj, (err, resp) => {
+//       if (err) {
+//         console.error(err);
+//       } else {
+//         // Mapping the Excel sheet rows to structured data
+//         const newData = resp.rows.slice(1).map((row) => ({
+//           name: row[0],
+//           email: row[1]
+//         }));
+//         setImportedData(newData);
+//       }
+//     });
+//   };
+
+//   const addImportedDataToTable = () => {
+//     const updatedData = [...data, ...importedData];
+//     setData(updatedData);
+//     localStorage.setItem("fileData", JSON.stringify(updatedData));
+//     setImportedData([]); // Clear imported preview after adding to table
+//   };
+
+//   const printPdfDocument = () => {
+//     const input = tableRef.current;
+//     if (!input) {
+//       console.error("Element with ref 'tableRef' not found.");
+//       return;
+//     }
+//     html2canvas(input).then((canvas) => {
+//       const imgData = canvas.toDataURL("image/png");
+//       const pdf = new jsPDF("p", "mm", "a4");
+//       const imgWidth = 210; 
+//       const pageHeight = 295; 
+//       const imgHeight = (canvas.height * imgWidth) / canvas.width;
+
+//       let heightLeft = imgHeight;
+//       let position = 0;
+
+//       pdf.addImage(imgData, "PNG", 0, position, imgWidth, imgHeight);
+//       heightLeft -= pageHeight;
+
+//       while (heightLeft > 0) {
+//         position = heightLeft - imgHeight;
+//         pdf.addPage();
+//         pdf.addImage(imgData, "PNG", 0, position, imgWidth, imgHeight);
+//         heightLeft -= pageHeight;
+//       }
+
+//       pdf.save("table.pdf");
+//     });
+//   };
+
+//   const printToExcel = () => {
+//     const wb = XLSX.utils.book_new();
+//     const ws = XLSX.utils.json_to_sheet(data);
+//     XLSX.utils.book_append_sheet(wb, ws, "Users");
+//     XLSX.writeFile(wb, "userData.xlsx");
+//   };
+
+//   return (
+//     <div className="table-container">
+//       <div className="form-div">
+//         <form onSubmit={handleSubmit} className="table-form">
+//           <label>
+//             Name:
+//             <input
+//               className="input"
+//               type="text"
+//               placeholder="Enter your name"
+//               name="name"
+//               value={inputValues.name}
+//               onChange={handleOnChange}
+//               required
+//             />
+//           </label>
+//           <label>
+//             Email:
+//             <input
+//               className="input"
+//               type="email"
+//               placeholder="Enter your email"
+//               name="email"
+//               value={inputValues.email}
+//               onChange={handleOnChange}
+//               required
+//             />
+//           </label>
+//           <button className="add-btn" type="submit">
+//             Add
+//           </button>
+//         </form>
+
+//         <div className="upload-div">
+//           <input
+//             className="uploadFile-input"
+//             type="file"
+//             onChange={handleImportFile}
+//             accept=".xlsx, .xls"
+//           />
+//         </div>
+//       </div>
+
+// <div className="preview-table">
+// {importedData.length > 0 && (
+//             <div>
+//               <h3>Preview Imported Data</h3>
+//               <table className="table-preview">
+//                 <thead>
+//                   <tr>
+//                     <th>Name</th>
+//                     <th>Email</th>
+//                   </tr>
+//                 </thead>
+//                 <tbody>
+//                   {importedData.map((item, index) => (
+//                     <tr key={index}>
+//                       <td>{item.name}</td>
+//                       <td>{item.email}</td>
+//                     </tr>
+//                   ))}
+//                 </tbody>
+//               </table>
+//               <button className="add-btn" onClick={addImportedDataToTable}>
+//                 Add Imported Data to Table
+//               </button>
+//             </div>
+//           )}
+// </div>
+
+//       <div className="table-div">
+//         <table className="table" ref={tableRef}>
+//           <thead>
+//             <tr>
+//               <th>Name</th>
+//               <th>Email</th>
+//             </tr>
+//           </thead>
+//           <tbody>
+//             {data.map((val, i) => (
+//               <tr key={i}>
+//                 <td>
+//                   <input
+//                     className="input"
+//                     type="text"
+//                     name="name"
+//                     value={val.name}
+//                     onChange={(e) => OnChangeTable(e, i)}
+//                   />
+//                 </td>
+//                 <td>
+//                   <input
+//                     className="input"
+//                     type="email"
+//                     name="email"
+//                     value={val.email}
+//                     onChange={(e) => OnChangeTable(e, i)}
+//                   />
+//                 </td>
+//               </tr>
+//             ))}
+//           </tbody>
+//         </table>
+//       </div>
+
+//       <div className="btns">
+//         <button className="excel-btn" onClick={printToExcel}>
+//           Create Excel
+//         </button>
+//         <button className="pdf-btn" onClick={printPdfDocument}>
+//           Create PDF
+//         </button>
+//       </div>
+//     </div>
+//   );
+// };
+
+
+
+
+// .prev-btn , .next-btn{
+//     border: 2px solid;
+//     padding: 0px 9px;
+//   }
+//   .prev-btn:hover , .next-btn:hover{
+//     border-color:#1379dd;
+//   }
+
+// .table-prev-next-btns {
+//     display: flex;
+//     align-items: center;
+//     gap: 20px;
+//   }
